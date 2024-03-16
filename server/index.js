@@ -17,7 +17,13 @@ const io = new Server(server, {
 
 
 io.on('connection', async (socket)=>{
-    console.log('Client is Connected!')
+    console.log('Client is Connected!');
+    socket.on('message', (msg) => {
+        io.emit('message', msg);
+    });
+    socket.on('disconnect', ()=>{
+        console.log('User is Disconnected!');
+    })
 })
 
 
